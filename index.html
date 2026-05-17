@@ -256,90 +256,74 @@ h1 {
     </div>
 
   </div>
+<script>
+  let currentType = "";
+  let lastCheckedIdentifier = "";
 
-  <script>
-    let currentType = "";
-    let lastCheckedIdentifier = "";
+  const SHEET_ID = "1yqR1G5Olrbr9PsV2j9Z0yt2xtkftZJfIoXupSMcNBUM";
+  const SHEET_NAME = "Members";
 
-    const SHEET_ID = "1yqR1G5Olrbr9PsV2j9Z0yt2xtkftZJfIoXupSMcNBUM";
-    const SHEET_NAME = "Members";
+  async function getMembers() {
+    const url = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
+    const response = await fetch(url);
 
-    async function getMembers() {
-      const url = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
-      const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("تعذر الاتصال بملف Google Sheets");
+    }
 
-      if (!response.ok) {
-        throw new Error("تعذر الاتصال بملف Google Sheets");
+    return await response.json();
+  }
+
+  function showMessage(text) {
+    const resDiv = document.getElementById("result");
+    resDiv.innerText = text;
+    resDiv.classList.remove("hidden");
+  }
+
+  async function checkMembership() {
+    const identifier = document.getElementById("identifier").value.trim().toLowerCase();
+
+    if (!identifier) {
+      showMessage("فضلاً أدخل الرقم الجامعي أو السجل المدني أولاً.");
+      return;
+    }
+
+    lastCheckedIdentifier = identifier;
+
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("updateSection").classList.add("hidden");
+    document.getElementById("externalRegisterSection").classList.add("hidden");
+
+    try {
+      const members = await getMembers();
+
+      const member = members.find(m =>
+        String(m["الإيميل الجامعي"] || m.email || "").trim().toLowerCase() === identifier ||
+        String(m["الرقم الجامعي"] || m.studentID || "").trim().toLowerCase() === identifier ||
+        String(m["السجل المدني"] || "").trim().toLowerCase() === identifier
+      );
+
+      if (member) {
+        currentType = member["نوع العضوية"] || member.memberType || "عضو";
+
+        document.getElementById("currentStatusMsg").innerText =
+          "نوع عضويتك الحالية: (" + currentType + ")";
+
+        document.getElementById("updateSection").classList.remove("hidden");
+
+      } else {
+        showMessage("أنت غير مسجل في النادي، فضلاً اضغط على الزر بالأسفل للانتقال لنموذج التسجيل.");
+        document.getElementById("externalRegisterSection").classList.remove("hidden");
       }
 
-      return await response.json();
+    } catch (error) {
+      showMessage("حدث خطأ أثناء قراءة بيانات العضوية. تأكدي أن الشيت عام وأن اسم التبويب Members.");
     }
+  }
 
-    function showMessage(text) {
-      const resDiv = document.getElementById("result");
-      resDiv.innerText = text;
-      resDiv.classList.remove("hidden");
-    }
-
-    async function checkMembership() {
-      const identifier = document.getElementById("identifier").value.trim().toLowerCase();
-
-      if (!identifier) {
-        showMessage("فضلاً أدخل الرقم الجامعي أو السجل المدني أولاً.");
-        return;
-      }
-
-      lastCheckedIdentifier = identifier;
-
-      document.getElementById("result").classList.add("hidden");
-      document.getElementById("updateSection").classList.add("hidden");
-      document.getElementById("externalRegisterSection").classList.add("hidden");
-
-      try {
-        const members = await getMembers();
-
-        const member = members.find(m =>
-          String(m["الإيميل الجامعي"] || m.email || "").trim().toLowerCase() === identifier ||
-          String(m["الرقم الجامعي"] || m.studentID || "").trim().toLowerCase() === identifier ||
-          String(m["السجل المدني"] || "").trim().toLowerCase() === identifier
-        );
-
-        if (member) {
-          currentType = member["نوع العضوية"] || member.memberType || "عضو";
-
-          document.getElementById("currentStatusMsg").innerText =
-            "نوع عضويتك الحالية: (" + currentType + ")";
-
-          const targetType = currentType === "عضو" ? "مستفيد" : "عضو";
-
-          document.getElementById("btnSwitch").innerText =
-            "تحويل حسابي إلى (" + targetType + ")";
-
-          document.getElementById("updateSection").classList.remove("hidden");
-
-        } else {
-          showMessage("أنت غير مسجل في النادي، فضلاً اضغط على الزر بالأسفل للانتقال لنموذج التسجيل.");
-          document.getElementById("externalRegisterSection").classList.remove("hidden");
-        }
-
-      } catch (error) {
-        showMessage("حدث خطأ أثناء قراءة بيانات العضوية. تأكدي أن Google Sheets عام وأن اسم التبويب Members.");
-      }
-    }
-
-    function switchMemberType() {
-      currentType = currentType === "عضو" ? "مستفيد" : "عضو";
-
-      showMessage("تم تحديث نوع عضويتك بنجاح إلى (" + currentType + ")");
-
-      document.getElementById("currentStatusMsg").innerText =
-        "نوع عضويتك الحالية: (" + currentType + ")";
-
-      const targetType = currentType === "عضو" ? "مستفيد" : "عضو";
-
-      document.getElementById("btnSwitch").innerText =
-        "تحويل حسابي إلى (" + targetType + ")";
-    }
-  </script>
+  function switchMemberType() {
+    showMessage("لا يمكن تحديث نوع العضوية من GitHub Pages مباشرة. التحديث يحتاج Google Apps Script أو Backend.");
+  }
+</script>
 </body>
 </html>
