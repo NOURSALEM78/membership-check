@@ -199,8 +199,9 @@ button:hover,
   body {
     padding: 14px;
     align-items: center;
-    min-height: 100vh;
-    background-position: center center;
+    min-height: 100dvh;
+    background: url("./الجوال.png") no-repeat center center fixed;
+    background-size: cover;
   }
 
   .card {
@@ -209,6 +210,8 @@ button:hover,
     min-height: auto;
     border-radius: 28px;
     padding: 34px 20px 26px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .logo-container {
@@ -259,9 +262,7 @@ button:hover,
   .social-link {
     font-size: 13px;
   }
-}
-    }
-  </style>
+}  </style>
 </head>
 
 <body>
