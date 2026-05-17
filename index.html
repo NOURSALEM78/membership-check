@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
   <title>نادي الإبداع وريادة الأعمال</title>
-  <link rel="icon" type="image/png" href="./logo.png">
+  <link rel="icon" type="image/png" href="./logo2.png">
 
   <style>
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Arial, sans-serif;
+      font-family: 'Readex Pro', sans-serif;
       background: url("./خلفية٦.png") no-repeat center center fixed;
       background-size: cover;
       color: white;
@@ -21,36 +21,56 @@
       padding: 24px;
       box-sizing: border-box;
     }
+body,
+input,
+button,
+a,
+p,
+h1,
+div {
 
-    .card {
-      width: 100%;
-      max-width: 430px;
-      min-height: 680px;
-      background: transparent;
-      border-radius: 0;
-      padding: 42px 28px 28px;
-      text-align: center;
-      box-sizing: border-box;
-    }
+  font-family: 'Readex Pro', sans-serif;
 
+}
+.card {
+  width: 100%;
+  max-width: 390px;
+  min-height: 610px;
+  background: rgba(0, 8, 12, 0.42);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 34px;
+  padding: 52px 34px 32px;
+  text-align: center;
+  box-sizing: border-box;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 25px 80px rgba(0,0,0,0.45);
+}
     .logo-container {
       text-align: center;
       margin-bottom: 22px;
     }
 
-    .logo-container img {
-      width: 95px;
-      height: 95px;
-      object-fit: contain;
-      display: inline-block;
-    }
+.logo-container img {
 
-    h1 {
-      margin: 10px 0 8px;
-      font-size: 26px;
-      color: #ffffff;
-      font-weight: 700;
-    }
+  width: 150px;
+  height: 150px;
+
+  object-fit: contain;
+
+}
+
+h1 {
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+  margin-top: 18px;
+
+  margin-bottom: 10px;
+
+}
 
     p {
       color: rgba(255, 255, 255, 0.88);
@@ -59,64 +79,94 @@
       margin-bottom: 22px;
     }
 
-    input {
-      width: 100%;
-      padding: 17px;
-      margin-top: 14px;
-      border-radius: 40px;
-      border: none;
-      box-sizing: border-box;
-      font-size: 15px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.95);
-      color: #073336;
-      outline: none;
-    }
+input {
 
-    button,
-    .btn-link {
-      width: 100%;
-      padding: 18px;
-      margin-top: 16px;
-      border-radius: 40px;
-      border: none;
-      box-sizing: border-box;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      display: block;
-      background: #3997a5;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s ease;
-      box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18);
-    }
+  width: 100%;
 
-    button:hover,
-    .btn-link:hover {
-      transform: translateY(-2px);
-      background: #43a9b8;
-    }
+  padding: 18px;
+
+  margin-top: 16px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.10);
+
+  color: white;
+
+  font-size: 15px;
+
+  text-align: center;
+
+  outline: none;
+
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+
+}
+
+button,
+.btn-link {
+
+  width: 100%;
+
+  padding: 18px;
+
+  margin-top: 16px;
+
+  border-radius: 999px;
+
+  border: none;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  background: rgba(50, 116, 129, 0.78);
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  backdrop-filter: blur(10px);
+
+}
+button:hover,
+.btn-link:hover {
+
+  background: rgba(96, 208, 230, 0.88);
+
+  transform: scale(1.02);
+
+}
 
     .hidden {
       display: none;
     }
 
-    .message {
-      margin-top: 16px;
-      padding: 15px;
-      border-radius: 24px;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.18);
-      line-height: 1.7;
-      color: white;
-    }
+.message {
 
-    .social-section {
-      margin-top: 34px;
-      padding-top: 0;
-    }
+  margin-top: 18px;
+
+  padding: 16px;
+
+  border-radius: 22px;
+
+  background: rgba(255,255,255,0.08);
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  color: white;
+
+  line-height: 1.8;
+
+}
+.social-section {
+  margin-top: 50px;
+}
 
     .social-section p {
       font-size: 13px;
@@ -124,10 +174,17 @@
       margin-bottom: 12px;
     }
 
-    .btn-social {
-      background: #3997a5;
+    .social-link {
       color: white;
-      border: none;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 6px;
+    }
+
+    .social-link:hover {
+      color: #d1e7e8;
     }
 
     @media (max-width: 480px) {
@@ -139,12 +196,26 @@
       .card {
         max-width: none;
         min-height: 100vh;
+        border-radius: 0;
         padding: 46px 24px 28px;
       }
 
-      h1 {
-        font-size: 24px;
-      }
+h1 {
+
+  margin-top: 26px;
+  margin-bottom: 14px;
+
+  font-size: 58px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: -1px;
+
+  color: #ffffff;
+
+}
     }
   </style>
 </head>
@@ -178,8 +249,8 @@
     <div id="result" class="message hidden"></div>
 
     <div class="social-section">
-      <p>قنوات التواصل الاجتماعي للنادي</p>
-      <a href="https://linktr.ee/iecuqu" target="_blank" class="btn-link btn-social">
+
+      <a href="https://linktr.ee/iecuqu" target="_blank" class="social-link">
         حسابات النادي
       </a>
     </div>
@@ -190,18 +261,19 @@
     let currentType = "";
     let lastCheckedIdentifier = "";
 
-    const members = [
-      {
-        email: "nour@uqu.edu.sa",
-        studentID: "441234567",
-        memberType: "عضو"
-      },
-      {
-        email: "test@uqu.edu.sa",
-        studentID: "441111111",
-        memberType: "مستفيد"
+    const SHEET_ID = "1yqR1G5Olrbr9PsV2j9Z0yt2xtkftZJfIoXupSMcNBUM";
+    const SHEET_NAME = "Members";
+
+    async function getMembers() {
+      const url = `https://opensheet.elk.sh/${SHEET_ID}/${SHEET_NAME}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error("تعذر الاتصال بملف Google Sheets");
       }
-    ];
+
+      return await response.json();
+    }
 
     function showMessage(text) {
       const resDiv = document.getElementById("result");
@@ -209,7 +281,7 @@
       resDiv.classList.remove("hidden");
     }
 
-    function checkMembership() {
+    async function checkMembership() {
       const identifier = document.getElementById("identifier").value.trim().toLowerCase();
 
       if (!identifier) {
@@ -223,29 +295,35 @@
       document.getElementById("updateSection").classList.add("hidden");
       document.getElementById("externalRegisterSection").classList.add("hidden");
 
-      const member = members.find(
-        m =>
-          m.email.toLowerCase() === identifier ||
-          m.studentID === identifier
-      );
+      try {
+        const members = await getMembers();
 
-      if (member) {
-        currentType = member.memberType;
+        const member = members.find(m =>
+          String(m["الإيميل الجامعي"] || m.email || "").trim().toLowerCase() === identifier ||
+          String(m["الرقم الجامعي"] || m.studentID || "").trim().toLowerCase() === identifier ||
+          String(m["السجل المدني"] || "").trim().toLowerCase() === identifier
+        );
 
+        if (member) {
+          currentType = member["نوع العضوية"] || member.memberType || "عضو";
 
-        document.getElementById("currentStatusMsg").innerText =
-          "نوع عضويتك الحالية: (" + currentType + ")";
+          document.getElementById("currentStatusMsg").innerText =
+            "نوع عضويتك الحالية: (" + currentType + ")";
 
-        const targetType = currentType === "عضو" ? "مستفيد" : "عضو";
+          const targetType = currentType === "عضو" ? "مستفيد" : "عضو";
 
-        document.getElementById("btnSwitch").innerText =
-          "تحويل حسابي إلى (" + targetType + ")";
+          document.getElementById("btnSwitch").innerText =
+            "تحويل حسابي إلى (" + targetType + ")";
 
-        document.getElementById("updateSection").classList.remove("hidden");
+          document.getElementById("updateSection").classList.remove("hidden");
 
-      } else {
-        showMessage("أنت غير مسجل في النادي، فضلاً اضغط على الزر بالأسفل للانتقال لنموذج التسجيل.");
-        document.getElementById("externalRegisterSection").classList.remove("hidden");
+        } else {
+          showMessage("أنت غير مسجل في النادي، فضلاً اضغط على الزر بالأسفل للانتقال لنموذج التسجيل.");
+          document.getElementById("externalRegisterSection").classList.remove("hidden");
+        }
+
+      } catch (error) {
+        showMessage("حدث خطأ أثناء قراءة بيانات العضوية. تأكدي أن Google Sheets عام وأن اسم التبويب Members.");
       }
     }
 
