@@ -368,20 +368,29 @@ document.getElementById("btnSwitch").innerText =
 
     showMessage(result.message);
 
-    if (result.success) {
-      currentType = newType;
+if (result.success) {
 
-      document.getElementById("currentStatusMsg").innerText =
-        "تم تحديث عضويتك بنجاح ✨";
+  currentType = newType;
 
-document.getElementById("btnSwitch").innerText =
-  currentType === "عضو"
-    ? "إجعلني مستفيد"
-    : "إجعلني عضو";
+  document.getElementById("currentStatusMsg").innerText =
 
-  } catch (error) {
-    showMessage("حدث خطأ أثناء تحديث العضوية.");
-  }
+    "تم تحديث عضويتك بنجاح ✨";
+
+  document.getElementById("btnSwitch").innerText =
+
+    currentType === "عضو"
+
+      ? "إجعلني مستفيد"
+
+      : "إجعلني عضو";
+
+}
+
+} catch (error) {
+
+  showMessage("حدث خطأ أثناء تحديث العضوية.");
+
+}
 }
 </script>
 </body>
