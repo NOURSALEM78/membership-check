@@ -332,9 +332,10 @@ if (member) {
 
     "أنت أحد المُبدعين ✨";
 
-  document.getElementById("btnSwitch").innerText =
-
-    "إجعلني مستفيد";
+document.getElementById("btnSwitch").innerText =
+  currentType === "عضو"
+    ? "إجعلني مستفيد"
+    : "إجعلني عضو";
 
   document.getElementById("updateSection").classList.remove("hidden");
 
@@ -373,9 +374,10 @@ if (member) {
       document.getElementById("currentStatusMsg").innerText =
         "تم تحديث عضويتك بنجاح ✨";
 
-      document.getElementById("btnSwitch").innerText =
-        "إجعلني مستفيد";
-    }
+document.getElementById("btnSwitch").innerText =
+  currentType === "عضو"
+    ? "إجعلني مستفيد"
+    : "إجعلني عضو";
 
   } catch (error) {
     showMessage("حدث خطأ أثناء تحديث العضوية.");
