@@ -325,61 +325,63 @@
         String(m["رقم الهوية"] || m["السجل المدني"] || "").trim().toLowerCase() === identifier
       );
 
-      if (member) {
-        currentType = member["العضوية"] || member["نوع العضوية"] || member.memberType || "عضو";
+if (member) {
 
-        document.getElementById("currentStatusMsg").innerText =
-          "نوع عضويتك الحالية: (" + currentType + ")";
+  currentType = member["العضوية"] || member["نوع العضوية"] || member.memberType || "عضو";
 
-        const targetType = currentType === "عضو" ? "مستفيد" : "عضو";
+  document.getElementById("currentStatusMsg").innerText =
 
-        document.getElementById("btnSwitch").innerText =
-          "تحويل حسابي إلى (" + targetType + ")";
+    "أنت أحد المُبدعين ✨";
 
-        document.getElementById("updateSection").classList.remove("hidden");
+  document.getElementById("btnSwitch").innerText =
 
-      } else {
-        showMessage("أنت غير مسجل في النادي، فضلاً اضغط على الزر بالأسفل للانتقال لنموذج التسجيل.");
-        document.getElementById("externalRegisterSection").classList.remove("hidden");
-      }
+    "تعديل نوع العضوية";
+
+  document.getElementById("updateSection").classList.remove("hidden");
+
+} else {
+
+  showMessage("أنت غير مسجل حالياً، انضم إلى المُبدعين ✨");
+
+  document.getElementById("externalRegisterSection").classList.remove("hidden");
+
+}
 
     } catch (error) {
       showMessage("حدث خطأ أثناء قراءة بيانات العضوية. تأكدي أن الشيت عام وأن اسم التبويب Members.");
     }
   }
 
-  async function switchMemberType() {
-    const newType = currentType === "عضو" ? "مستفيد" : "عضو";
+ async function switchMemberType() {
+  const newType = currentType === "عضو" ? "مستفيد" : "عضو";
 
-    try {
-      const response = await fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          identifier: lastCheckedIdentifier,
-          newType: newType
-        })
-      });
+  try {
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify({
+        identifier: lastCheckedIdentifier,
+        newType: newType
+      })
+    });
 
-      const result = await response.json();
+    const result = await response.json();
 
-      showMessage(result.message);
+    showMessage(result.message);
 
-      if (result.success) {
-        currentType = newType;
+    if (result.success) {
+      currentType = newType;
 
-        document.getElementById("currentStatusMsg").innerText =
-          "نوع عضويتك الحالية: (" + currentType + ")";
+      document.getElementById("currentStatusMsg").innerText =
+        "تم تحديث عضويتك بنجاح ✨";
 
-        const nextType = currentType === "عضو" ? "مستفيد" : "عضو";
-
-        document.getElementById("btnSwitch").innerText =
-          "تحويل حسابي إلى (" + nextType + ")";
-      }
-
-    } catch (error) {
-      showMessage("حدث خطأ أثناء تحديث العضوية.");
+      document.getElementById("btnSwitch").innerText =
+        "تعديل نوع العضوية";
     }
+
+  } catch (error) {
+    showMessage("حدث خطأ أثناء تحديث العضوية.");
   }
+}
 </script>
 </body>
 </html>
