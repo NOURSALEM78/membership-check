@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>نادي الإبداع وريادة الأعمال</title>
+  <link rel="icon" type="image/png" href="./logo.png">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: url("./خلفية٦.png") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      min-height: 680px;
+      background: transparent;
+      border-radius: 0;
+      padding: 42px 28px 28px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .logo-container img {
+      width: 95px;
+      height: 95px;
+      object-fit: contain;
+      display: inline-block;
+    }
+
+    h1 {
+      margin: 10px 0 8px;
+      font-size: 26px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.8;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    input {
+      width: 100%;
+      padding: 17px;
+      margin-top: 14px;
+      border-radius: 40px;
+      border: none;
+      box-sizing: border-box;
+      font-size: 15px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      color: #073336;
+      outline: none;
+    }
+
+    button,
+    .btn-link {
+      width: 100%;
+      padding: 18px;
+      margin-top: 16px;
+      border-radius: 40px;
+      border: none;
+      box-sizing: border-box;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      background: #3997a5;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s ease;
+      box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    button:hover,
+    .btn-link:hover {
+      transform: translateY(-2px);
+      background: #43a9b8;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      margin-top: 16px;
+      padding: 15px;
+      border-radius: 24px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.18);
+      line-height: 1.7;
+      color: white;
+    }
+
+    .social-section {
+      margin-top: 34px;
+      padding-top: 0;
+    }
+
+    .social-section p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 12px;
+    }
+
+    .btn-social {
+      background: #3997a5;
+      color: white;
+      border: none;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+        align-items: stretch;
+      }
+
+      .card {
+        max-width: none;
+        min-height: 100vh;
+        padding: 46px 24px 28px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+
+    <div class="logo-container">
+      <img src="./logo.png" alt="شعار النادي" />
+    </div>
+
+    <h1>عضوية المُبدعين</h1>
+
+    <p>أدخل السجل المدني أو الرقم الجامعي للتحقق من حالة عضويتك</p>
+
+    <input type="text" id="identifier" placeholder="الرقم الجامعي أو السجل المدني" />
+
+    <button onclick="checkMembership()">التحقق من العضوية</button>
+
+    <div id="updateSection" class="hidden">
+      <div id="currentStatusMsg" class="message"></div>
+      <button id="btnSwitch" onclick="switchMemberType()">تعديل نوع العضوية</button>
+    </div>
+
+    <div id="externalRegisterSection" class="hidden">
+      <a href="https://forms.gle/XXXXXX" target="_blank" class="btn-link">
+        اضغط هنا للتسجيل في النادي
+      </a>
+    </div>
+
+    <div id="result" class="message hidden"></div>
+
+    <div class="social-section">
+      <p>قنوات التواصل الاجتماعي للنادي</p>
+      <a href="https://linktr.ee/iecuqu" target="_blank" class="btn-link btn-social">
+        حسابات النادي
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    let currentType = "";
+    let lastCheckedIdentifier = "";
+
+    const members = [
+      {
+        email: "nour@uqu.edu.sa",
+        studentID: "441234567",
+        memberType: "عضو"
+      },
+      {
+        email: "test@uqu.edu.sa",
+        studentID: "441111111",
+        memberType: "مستفيد"
+      }
+    ];
+
+    function showMessage(text) {
+      const resDiv = document.getElementById("result");
+      resDiv.innerText = text;
+      resDiv.classList.remove("hidden");
+    }
+
+    function checkMembership() {
+      const identifier = document.getElementById("identifier").value.trim().toLowerCase();
+
+      if (!identifier) {
+        showMessage("فضلاً أدخل الرقم الجامعي أو السجل المدني أولاً.");
+        return;
+      }
+
+      lastCheckedIdentifier = identifier;
+
+      document.getElementById("result").classList.add("hidden");
+      document.getElementById("updateSection").classList.add("hidden");
+      document.getElementById("externalRegisterSection").classList.add("hidden");
+
+      const member = members.find(
+        m =>
+          m.email.toLowerCase() === identifier ||
+          m.studentID === identifier
+      );
+
+      if (member) {
+        currentType = member.memberType;
+
+
+        document.getElementById("currentStatusMsg").innerText =
+          "نوع عضويتك الحالية: (" + currentType + ")";
+
+        const targetType = currentType === "عضو" ? "مستفيد" : "عضو";
+
+        document.getElementById("btnSwitch").innerText =
+          "تحويل حسابي إلى (" + targetType + ")";
+
+        document.getElementById("updateSection").classList.remove("hidden");
+
+      } else {
+        showMessage("أنت غير مسجل في النادي، فضلاً اضغط على الزر بالأسفل للانتقال لنموذج التسجيل.");
+        document.getElementById("externalRegisterSection").classList.remove("hidden");
+      }
+    }
+
+    function switchMemberType() {
+      currentType = currentType === "عضو" ? "مستفيد" : "عضو";
+
+      showMessage("تم تحديث نوع عضويتك بنجاح إلى (" + currentType + ")");
+
+      document.getElementById("currentStatusMsg").innerText =
+        "نوع عضويتك الحالية: (" + currentType + ")";
+
+      const targetType = currentType === "عضو" ? "مستفيد" : "عضو";
+
+      document.getElementById("btnSwitch").innerText =
+        "تحويل حسابي إلى (" + targetType + ")";
+    }
+  </script>
+</body>
+</html>
